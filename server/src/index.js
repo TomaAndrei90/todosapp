@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -14,6 +15,7 @@ const { checkTokenSetUser, isLoggedIn } = require('./auth/middlewares');
 const auth = require('./auth/index');
 
 mongoose.set('debug', process.env.NODE_ENV === 'production');
+console.log('Uri', process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -34,21 +36,18 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(checkTokenSetUser);
-
-app.get('/', (req, res) => res.json({
-  user: req.user,
-}));
+app.use(express.static(path.resolve(__dirname, '../../client/build')));
 
 app.use('/auth', auth);
 app.use('/api/todoLists', isLoggedIn, routerTodoLists);
 app.use('/api/todos', isLoggedIn, routerTodos);
 
-// unprotected, just as i develop, should delete when project is done
-// app.use('/api/todoLists', routerTodoLists);
-// app.use('/api/todos', routerTodos);
-
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
+
+app.get('*', function(request, response) {
+  response.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'));
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

@@ -10,7 +10,7 @@ const checkTokenSetUser = (req, res, next) => {
       const token = authHeader.split(' ')[1];
       if (token) {
 				const decoded = jwt.verify(token, TOKEN_SECRET);
-				console.log('decoded', decoded)
+				// console.log('decoded', decoded)
         req.user = decoded;
       }
     }
