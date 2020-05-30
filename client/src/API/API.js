@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-undef
-const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://minimaltodoapp.herokuapp.com/';
+const API_URL = process.env.NODE_ENV === 'development' ? 'http://localhost:3001' : 'https://minimaltodoapp.herokuapp.com';
 
 // route: most of these fetches need to have the authorization in headers
 
