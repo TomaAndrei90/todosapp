@@ -15,7 +15,6 @@ const { checkTokenSetUser, isLoggedIn } = require('./auth/middlewares');
 const auth = require('./auth/index');
 
 mongoose.set('debug', process.env.NODE_ENV === 'production');
-console.log('Uri', process.env.MONGODB_URI);
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

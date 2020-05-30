@@ -58,17 +58,13 @@ const Signup = () => {
 	
 	const onSubmit = async (data, e) => { 
 		try {
-			console.log('submitted');
-			console.log(data);
 			setLoading(true);
 			const newUserAndToken = await signup(data);
-			console.log(newUserAndToken);
 			const { user, token } = newUserAndToken;
 			localStorage.setItem('token', token);
 			setLoading(false);
 			history.push('/dashboard');
 		} catch (error) {
-			console.error(error);
 			setError(error.message);
 			setOpenSnackbar(true);
 			setLoading(false);

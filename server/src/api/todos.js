@@ -73,8 +73,3 @@ router.post('/updateTodo/:id/:todoId', async (req, res, next) => {
 });
 
 module.exports = router;
-
-
-// MISC
-// Helper to simulate slow server response:
-// await new Promise(resolve => setTimeout(resolve, 5000));

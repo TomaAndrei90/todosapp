@@ -68,7 +68,6 @@ const Dashboard = () => {
 				if (!response) throw Error;
 				setUsername(response.user.username);
 				getAllTodoLists();
-				console.log('response', response);
 			} catch (error) {
 				logout();
 			}
@@ -84,7 +83,6 @@ const Dashboard = () => {
 		try {
 			setLoadingAddList(true);
 			const newTodoList = await addTodoList(data);
-			console.log(newTodoList);
 			setTodoLists(todoLists => [
 				...todoLists, 
 				newTodoList,
@@ -92,7 +90,6 @@ const Dashboard = () => {
 			e.target.reset();
 			setLoadingAddList(false);
 		} catch (error) {
-			console.error(error);
 			setError(error.message);
 			setOpenSnackbar(true);
 			setLoadingAddList(false);

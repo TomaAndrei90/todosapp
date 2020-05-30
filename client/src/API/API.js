@@ -86,7 +86,6 @@ const deleteTodo = async (id, todoId) => {
 };
 
 const updateTodo = async (id, todoId, data) => {
-	console.log(id, todoId, data);
 	const response = await fetch(`${API_URL}/api/todos/updateTodo/${id}/${todoId}`, {
 		method: 'POST',
 		headers: {
