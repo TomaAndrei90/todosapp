@@ -30,10 +30,10 @@ db.once('open', () => {
   console.log('connected to db');
 });
 
-// app.use(helmet());
+app.use(helmet());
 app.use(morgan('common'));
 app.use(cors({
-  // origin: process.env.CORS_ORIGIN,
+  origin: process.env.CORS_ORIGIN,
 }));
 app.use(express.json());
 app.use(checkTokenSetUser);
@@ -44,9 +44,9 @@ app.use('/api/todos', isLoggedIn, routerTodos);
 
 app.get('/*', function(req, res) {
 	console.log('inside /*');
-	console.log('join', path.join(__dirname, '../../client/build/index.html'));
-	console.log('resolve', path.resolve(__dirname, '../../client/build'))
-  res.sendFile(path.join(__dirname, '../../client/build/index.html'), function(err) {
+	console.log(path.join(__dirname, '../../client/build/index.html'));
+	console.log(path.resolve(__dirname, '../../client/build', 'index.html'))
+  res.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'), function(err) {
     if (err) {
 			console.log('inside /* error')
       res.status(500).send(err)
