@@ -37,7 +37,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(checkTokenSetUser);
-// app.use(express.static(path.resolve(__dirname, '../../client/build')));
+app.use(express.static(path.resolve(__dirname, '../../client/build')));
 
 app.use('/auth', auth);
 app.use('/api/todoLists', isLoggedIn, routerTodoLists);
