@@ -14,7 +14,9 @@ const app = express();
 const { checkTokenSetUser, isLoggedIn } = require('./auth/middlewares');
 const auth = require('./auth/index');
 
-mongoose.set('debug', process.env.NODE_ENV === 'production');
+// mongoose.set('debug', process.env.NODE_ENV === 'production');
+mongoose.set('debug', true);
+console.log('process.env.DB_URL', process.env.DB_URL)
 mongoose.connect(process.env.DB_URL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -45,7 +47,7 @@ app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 
 app.get('*', function(request, response) {
-  response.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'));
+  // response.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'));
 });
 
 const PORT = process.env.PORT || 3001;
