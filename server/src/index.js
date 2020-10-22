@@ -43,7 +43,9 @@ app.use('/api/todoLists', isLoggedIn, routerTodoLists);
 app.use('/api/todos', isLoggedIn, routerTodos);
 
 app.get('/*', function(req, res) {
-	console.log('inside /*')
+	console.log('inside /*');
+	console.log('join', path.join(__dirname, '../../client/build/index.html'));
+	console.log('resolve', path.resolve(__dirname, '../../client/build'))
   res.sendFile(path.join(__dirname, '../../client/build/index.html'), function(err) {
     if (err) {
 			console.log('inside /* error')
