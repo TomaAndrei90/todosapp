@@ -46,7 +46,7 @@ app.get('/*', function(req, res) {
 	console.log('inside /*');
 	console.log(path.join(__dirname, '../../client/build/index.html'));
 	console.log(path.resolve(__dirname, '../../client/build', 'index.html'))
-  res.sendFile(path.resolve(__dirname, '../../client/public'), function(err) {
+  res.sendFile(path.resolve(__dirname, '../../client/public/index.html'), function(err) {
     if (err) {
 			console.log('inside /* error')
       res.status(500).send(err)
