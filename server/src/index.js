@@ -37,7 +37,9 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(checkTokenSetUser);
+console.log('before express static')
 // app.use(express.static(path.resolve(__dirname, '../../client/build')));
+console.log('after express static')
 
 app.use('/auth', auth);
 app.use('/api/todoLists', isLoggedIn, routerTodoLists);
@@ -53,8 +55,10 @@ app.use(middlewares.errorHandler);
 // });
 
 app.get('/*', function(req, res) {
+	console.log('inside /*')
   res.sendFile(path.join(__dirname, '../../client/build/index.html'), function(err) {
     if (err) {
+			console.log('inside /* error')
       res.status(500).send(err)
     }
   })
