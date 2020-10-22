@@ -37,13 +37,14 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(checkTokenSetUser);
-console.log('before express static')
-// app.use(express.static(path.resolve(__dirname, '../../client/build')));
-console.log('after express static')
 
 app.use('/auth', auth);
 app.use('/api/todoLists', isLoggedIn, routerTodoLists);
 app.use('/api/todos', isLoggedIn, routerTodos);
+console.log('before express static')
+app.use(express.static(path.resolve(__dirname, '../../client/build')));
+console.log('after express static')
+
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
