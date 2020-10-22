@@ -46,11 +46,19 @@ app.use('/api/todos', isLoggedIn, routerTodos);
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 
-app.get('/*', function(request, response) {
-	// response.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'));
-	console.log('inside /*')
-  response.sendFile(path.join(__dirname, '../../client/build/index.html'));
-});
+// app.get('/*', function(request, response) {
+// 	// response.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'));
+// 	console.log('inside /*')
+//   response.sendFile(path.join(__dirname, '../../client/build/index.html'));
+// });
+
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../../client/build/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
