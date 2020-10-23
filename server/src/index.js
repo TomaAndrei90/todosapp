@@ -37,14 +37,15 @@ app.use(express.json());
 app.use(checkTokenSetUser);
 
 app.use(express.static(path.resolve(__dirname, '../../client/build')), () => { console.log('use express static')});
-app.use('/*', function(request, response) {
-	console.log('get /*')
-  response.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'));
-});
 
 app.use('/auth', auth);
 app.use('/api/todoLists', isLoggedIn, routerTodoLists);
 app.use('/api/todos', isLoggedIn, routerTodos);
+
+app.get('/*', function(request, response) {
+	console.log('get /*')
+  response.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'));
+});
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
