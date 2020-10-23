@@ -35,15 +35,15 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(checkTokenSetUser);
-app.use(() => { console.log('use express static')}, express.static(path.resolve(__dirname, '../../client/build')));
+app.use(express.static(path.resolve(__dirname, '../../client/build')), () => { console.log('use express static')});
 app.get('/*', function(request, response) {
 	console.log('get /*')
   response.sendFile(path.resolve(__dirname, '../../client/build', 'index.html'));
 });
 
-app.use(() => { console.log('/auth'), '/auth', auth);
-app.use(() => { console.log('/api/todoLists'), '/api/todoLists', isLoggedIn, routerTodoLists);
-app.use(() => { console.log('/api/todos'), '/api/todos', isLoggedIn, routerTodos);
+app.use('/auth', auth, () => { console.log('/auth')});
+app.use('/api/todoLists', isLoggedIn, routerTodoLists,  () => { console.log('/api/todoLists')});
+app.use('/api/todos', isLoggedIn, routerTodos, () => { console.log('/api/todos')} );
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
