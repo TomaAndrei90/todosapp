@@ -34,6 +34,7 @@ const createTokenSendResponse = (user, res, next) => {
 };
 
 router.get('/', (req, res) => {
+	console.log('index auth /');
   res.json({
     user: req.user
   });
